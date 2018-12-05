@@ -1,0 +1,12 @@
+.card.post-settings .form-group {
+    position: relative;
+    left: 40px;
+}
+
+.card.post-settings .card-header {
+    margin-bottom: 15px;
+}
+
+.dashboard-menu {
+    margin-bottom: 20px;
+}
