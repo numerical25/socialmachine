@@ -1,3 +1,3 @@
 @if(!$page->page_only)
-    <comments-component></comments-component>
+<comments-component page_id="{{$page->id}}"></comments-component>
 @endif

@@ -5,6 +5,7 @@ namespace Modules\CMS\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\CMS\Entities\Comment;
 
 class CMSController extends Controller
 {
@@ -12,7 +13,7 @@ class CMSController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index($page_id)
     {
         return view('cms::index');
     }

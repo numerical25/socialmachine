@@ -23,7 +23,7 @@ class PostTableSeeder extends Seeder
             'show_in_menu' => 1,
             'created_at'=>Carbon::now(),
             'updated_at'=>Carbon::now(),
-            'slug'=>'/about'
+            'slug'=>'about'
         ]);
         for($i = 0; $i < 40; $i++) {
             DB::table('posts')->insert([

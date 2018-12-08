@@ -11337,8 +11337,14 @@ module.exports = Cancel;
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(16);
 
-window._ = __webpack_require__(11);
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+window._ = __webpack_require__(12);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -11349,7 +11355,7 @@ window._ = __webpack_require__(11);
 try {
   window.$ = window.jQuery = __webpack_require__(3);
 
-  __webpack_require__(13);
+  __webpack_require__(14);
 } catch (e) {}
 
 /**
@@ -11358,7 +11364,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(15);
+window.axios = __webpack_require__(10);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -11394,7 +11400,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -28506,10 +28512,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(12)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(13)(module)))
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -28537,7 +28543,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -28546,7 +28552,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(3), __webpack_require__(14)) :
+   true ? factory(exports, __webpack_require__(3), __webpack_require__(15)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -32487,7 +32493,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35066,12 +35072,6 @@ Popper.Defaults = Defaults;
 //# sourceMappingURL=popper.js.map
 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(16);
 
 /***/ }),
 /* 16 */
@@ -47317,7 +47317,7 @@ module.exports = __webpack_require__(45);
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(10);
+__webpack_require__(11);
 window.Vue = __webpack_require__(34);
 
 /**
@@ -47385,6 +47385,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
 //
@@ -47394,15 +47396,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        console.log('Component mounted.');
+        //comment.page_id =  this._props.getPageId();
+        this.getComments();
+    },
+
+    props: ['page_id'],
+    data: function data() {
+        return {
+            comments: [],
+            comment: {
+                username: '',
+                post_id: '',
+                user_id: '',
+                comment: ''
+            }
+        };
     },
 
     methods: {
-        greet: function greet(event) {
-            alert("Hello");
+        submitComment: function submitComment() {
+            var _this = this;
+
+            this.comment.post_id = this.page_id;
+            this.comment.user_id = 0;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/comments/store', this.comment).then(function (response) {
+                _this.comments = response.data;
+                if (response.data.length) {
+                    _this.comment.comment = '';
+                }
+            });
+        },
+        getComments: function getComments(event) {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/comments/all/' + this.page_id).then(function (response) {
+                _this2.comments = response.data;
+            });
         }
     }
 });
@@ -47415,27 +47466,107 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "comment-form" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("button", { staticClass: "btn btn-primary", on: { click: _vm.greet } }, [
-      _vm._v("Comment")
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { id: "exampleFormControlTextarea1", rows: "3" }
+  return _c(
+    "div",
+    [
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "comment-form" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.comment.username,
+                expression: "comment.username"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", rows: "3" },
+            domProps: { value: _vm.comment.username },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.comment, "username", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.comment.comment,
+                expression: "comment.comment"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { rows: "3" },
+            domProps: { value: _vm.comment.comment },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.comment, "comment", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            on: {
+              click: function($event) {
+                _vm.submitComment()
+              }
+            }
+          },
+          [_vm._v("Comment")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _vm._l(_vm.comments, function(c) {
+        return _c("div", { key: c.id }, [
+          _c("div", { staticClass: "media" }, [
+            _c("img", {
+              staticClass: "mr-3",
+              attrs: {
+                src: "https://via.placeholder.com/64",
+                alt: "Generic placeholder image"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "media-body" }, [
+              _c("h5", { staticClass: "mt-0" }, [
+                _vm._v(_vm._s(c.username) + " - " + _vm._s(c.created_at))
+              ]),
+              _vm._v(
+                "\n                " + _vm._s(c.comment) + "\n            "
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("hr")
+        ])
       })
-    ])
-  }
-]
+    ],
+    2
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

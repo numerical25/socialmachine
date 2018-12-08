@@ -5,6 +5,7 @@ namespace Modules\CMS\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\CMS\Entities\Comment;
 
 class CommentsController extends Controller
 {
@@ -12,9 +13,11 @@ class CommentsController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index($page_id) 
     {
-        return view('cms::index');
+        $comments = new Comment();
+        return $comments->getComments($page_id);
+        //return view('cms::index');
     }
 
     /**
@@ -32,7 +35,14 @@ class CommentsController extends Controller
      * @return Response
      */
     public function store(Request $request)
-    {
+    {        
+        $data = $request->all();
+        if(Comment::create($data)) {
+            $data = (object)$data;
+            $comments = new Comment();
+            return $comments->getComments($data->post_id);
+        }
+        return [];
     }
 
     /**
