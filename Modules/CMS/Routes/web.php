@@ -14,3 +14,9 @@
 Route::prefix('cms')->group(function() {
     Route::get('/', 'CMSController@index');
 });
+
+Route::get('/', 'PostController@index');
+Route::get('admin/posts/all', 'PostController@adminIndex')->middleware('auth');
+Route::resource('admin/posts','PostController')->middleware('auth');
+Route::any('page/search', 'PostController@search');
+Route::any('page/{slug}', 'PostController@view')->where('slug', '([A-z\d-\/_.]+)?');
