@@ -16,7 +16,15 @@ Route::prefix('cms')->group(function() {
 });
 
 Route::get('/', 'PostController@index');
-Route::get('admin/posts/all', 'PostController@adminIndex')->middleware('auth');
-Route::resource('admin/posts','PostController')->middleware('auth');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::group(['middleware' => ['role:super-admin']], function () {
+        Route::get('admin/posts/all', 'PostController@adminIndex');
+        Route::resource('admin/posts','PostController');
+        Route::get('admin/home', 'HomeController@adminIndex')->name('home');
+    });
+});
+
 Route::any('page/search', 'PostController@search');
 Route::any('page/{slug}', 'PostController@view')->where('slug', '([A-z\d-\/_.]+)?');

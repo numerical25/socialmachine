@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light main-nav">
 <a class="navbar-brand" href="/">Social Machine</a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -6,7 +6,7 @@
 
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="nav-item  {{ request()->is('/') ? 'active' : '' }}">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
         @include('includes.header.nav')
@@ -18,13 +18,26 @@
                     Welcome
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/login">Login</a>
-                    <a class="dropdown-item" href="/register">Register</a>
-                    <div class="dropdown-divider"></div>
-                    <a  class="dropdown-item" 
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"
-                        href="{{ route('logout') }}">Logout</a>
+                    @guest
+                        <a class="dropdown-item" href="/login">Login</a>
+                        <a class="dropdown-item" href="/register">Register</a>
+                    @endguest
+                    
+                    @auth
+                        <a class="dropdown-item" href="/home">Dashboard</a>
+                    @endauth
+
+                    @role('super-admin')
+                        <a class="dropdown-item" href="/admin/home">Admin</a>
+                    @endrole
+
+                    @auth
+                        <div class="dropdown-divider"></div>
+                        <a  class="dropdown-item" 
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"
+                            href="{{ route('logout') }}">Logout</a>
+                    @endauth
                 </div>
             </li>
         </ul>

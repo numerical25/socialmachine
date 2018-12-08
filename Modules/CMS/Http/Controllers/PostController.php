@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use \App\Post;
 use App\Http\Controllers\Controller;
 use BootstrapComponents;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
