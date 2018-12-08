@@ -5,4 +5,5 @@
         <h3>Author: {{ $page->author}}</h3>
         {!! $page->content !!}
 </article>
+@include('cms::comments.index',['page'=>$page])
 @stop

@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\CMS\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use \App\Post;
+use App\Http\Controllers\Controller;
 use BootstrapComponents;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
