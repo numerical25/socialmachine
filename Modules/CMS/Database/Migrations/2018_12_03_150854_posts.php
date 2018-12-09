@@ -23,6 +23,7 @@ class Posts extends Migration
             $table->boolean('published');
             $table->boolean('page_only');
             $table->boolean('show_in_menu');
+            $table->integer('sub_post_id')->nullable();
             $table->timestamps();
         });
     }

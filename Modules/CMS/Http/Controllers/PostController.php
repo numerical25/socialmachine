@@ -4,7 +4,7 @@ namespace Modules\CMS\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use \App\Post;
+use \Modules\CMS\Entities\Post;
 use App\Http\Controllers\Controller;
 use BootstrapComponents;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +29,7 @@ class PostController extends Controller
                     ->where('show_in_menu',0)
                     ->get();
         $items = collect($items);
-        return view('pages.home', 
+        return view('cms::pages.home', 
         [
             'posts'=>$posts,
             'pagination' => BootstrapComponents::pagination($items, $page, $perPage, '', ['arrows' => true])
@@ -44,7 +44,7 @@ class PostController extends Controller
         $posts = DB::table('posts')->paginate($perPage);
         $items = DB::table('posts')->get();
         $items = collect($items);
-        return view('pages.posts.index', 
+        return view('cms::pages.posts.index', 
             [
                 'posts'=>$posts,
                 'pagination' => BootstrapComponents::pagination($items, $page, $perPage, '', ['arrows' => true])
@@ -61,7 +61,7 @@ class PostController extends Controller
         //
         $post = new Post();
         $action = 'store';
-        return view('pages.posts.create',['post'=>$post]);
+        return view('cms::pages.posts.create',['post'=>$post]);
     }
 
     /**
@@ -98,7 +98,7 @@ class PostController extends Controller
     public function view($slug) {
         //$view = $request->path();
         $page = Post::where('slug',$slug)->first();
-        return view('pages.posts.page',['page'=>$page]);
+        return view('cms::pages.posts.page',['page'=>$page]);
     }
 
     /**
@@ -109,7 +109,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('pages.posts.create',['post'=>$post]);
+        return view('cms::pages.posts.create',['post'=>$post]);
     }
 
     /**
@@ -149,7 +149,7 @@ class PostController extends Controller
         $page = $request->get('page', 1);
         $perPage = 5;
         $items = collect($posts);
-        return view('pages.home', 
+        return view('cms::pages.home', 
         [
             'posts'=>$posts,
             'pagination' => BootstrapComponents::pagination($items, $page, $perPage, '', ['arrows' => true])

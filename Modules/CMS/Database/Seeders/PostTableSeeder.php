@@ -1,7 +1,9 @@
 <?php
+namespace Modules\CMS\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use \DB;
 
 class PostTableSeeder extends Seeder
 {
@@ -13,7 +15,7 @@ class PostTableSeeder extends Seeder
     public function run()
     {
         //
-        $lipsum = new joshtronic\LoremIpsum();
+        $lipsum = new \joshtronic\LoremIpsum();
         DB::table('posts')->insert([
             'title' => 'About',
             'author' => 'Anthony Gordon',
