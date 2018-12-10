@@ -17,7 +17,5 @@
             </li>
         @endforeach
     </ul>
-    {{-- {{ Form::bsToggle('page_only','Page Only',null,false,['data-toggle'=>'toggle']) }}
-    {{ Form::bsToggle('published','Publish',null,false,['data-toggle'=>'toggle']) }}
-    {{ Form::bsToggle('show_in_menu','Show In Menu',null,false,['data-toggle'=>'toggle']) }} --}}
-</div>
+</div>   
+@smInclude("cms::test")   

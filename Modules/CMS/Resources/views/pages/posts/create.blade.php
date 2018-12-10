@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('cms::layouts.admin')
 @section('content')
 {{ Form::model($post, array('url' => '/admin/posts/'.$post->id)) }}
 <div class="row">

@@ -1,4 +1,6 @@
-@foreach(Modules\CMS\Entities\Post::getMenu() as $item)
+@inject('POST', Modules\CMS\Entities\Post)
+
+@foreach($POST::getMenu() as $item)
 @if(count($item->children))
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

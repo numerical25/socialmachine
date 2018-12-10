@@ -5,6 +5,8 @@ namespace Modules\CMS\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
+use Illuminate\Support\Facades\Blade;
+
 class CMSServiceProvider extends ServiceProvider
 {
     /**
@@ -26,6 +28,9 @@ class CMSServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        Blade::directive('smSection', function ($section) {
+            return "";
+        });
     }
 
     /**

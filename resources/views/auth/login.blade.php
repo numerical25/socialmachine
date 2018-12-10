@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('cms::layouts.default')
 @section('content')
 <div class="card">
 <div class="card-header">

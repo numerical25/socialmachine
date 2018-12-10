@@ -9,7 +9,7 @@
         <li class="nav-item  {{ request()->is('/') ? 'active' : '' }}">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
-        @include('includes.header.nav')
+        @include('cms::includes.header.nav')
     </ul>
     <form class="form-inline my-2 my-lg-0" action="/page/search" method="GET">
         <ul class="navbar-nav mr-auto">

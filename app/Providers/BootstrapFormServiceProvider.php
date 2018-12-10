@@ -14,10 +14,10 @@ class BootstrapFormServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        \Form::component('bsText', 'components.form.text', ['name', 'value' => null, 'attributes' => []]);
-        \Form::component('bsToggle', 'components.form.toggle', ['name','label' ,'value' => null,'checked'=>false ,'attributes' => []]);
-        \Form::component('bsTextArea', 'components.form.textarea', ['name', 'value' => null, 'attributes' => [], 'classes'=>'']);
-        \Form::component('bsSubmit', 'components.form.submit', ['name', 'attributes'=>[]]);
+        \Form::component('bsText', 'cms::components.form.text', ['name', 'value' => null, 'attributes' => []]);
+        \Form::component('bsToggle', 'cms::components.form.toggle', ['name','label' ,'value' => null,'checked'=>false ,'attributes' => []]);
+        \Form::component('bsTextArea', 'cms::components.form.textarea', ['name', 'value' => null, 'attributes' => [], 'classes'=>'']);
+        \Form::component('bsSubmit', 'cms::components.form.submit', ['name', 'attributes'=>[]]);
     }
 
     /**

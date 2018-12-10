@@ -13,5 +13,10 @@ class EncryptCookies extends Middleware
      */
     protected $except = [
         //
+        'XDEBUG_SESSION',
+        'pma_lang',
+        'pmaUser-1',
+        'pmaAuth-1',
+        'phpMyAdmin'
     ];
 }
